@@ -29,6 +29,15 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
+
+    // gestionando error de validación
+    if (err.array) {
+      // error de validación
+      err.status = 422;
+      const errInfo = err.array({ onlyFirstError: true })[0];
+      err.message = `(${errInfo.location}) ${errInfo.param} ${errInfo.msg}`;
+    }
+    
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
