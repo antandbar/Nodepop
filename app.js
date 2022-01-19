@@ -3,11 +3,13 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+const { isAPIRequest } = require('./lib/utils');
 var app = express();
+require('./lib/connectMongoose');
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -19,6 +21,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+/**
+ * Rutas de mi API
+ */
+
+/**
+ * Rutas de mi website
+ */
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
@@ -37,13 +47,19 @@ app.use(function(err, req, res, next) {
       const errInfo = err.array({ onlyFirstError: true })[0];
       err.message = `(${errInfo.location}) ${errInfo.param} ${errInfo.msg}`;
     }
+
+    res.status(err.status || 500);
+      // si es un error en el API respondo JSON
+    if (isAPIRequest(req)) {
+      res.json({ error: err.message });
+      return;
+    }
     
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
-  res.status(err.status || 500);
   res.render('error');
 });
 
