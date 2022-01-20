@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 // definir un esquema
-const adSchema = mongoose.Schema({
+const anuncioSchema = mongoose.Schema({
   nombre: String,
   venta: Boolean,
   precio: Number,
@@ -12,7 +12,7 @@ const adSchema = mongoose.Schema({
   });
 
 
-// creo el modelo con ese esquema
-const Ad = mongoose.model('Ad', adSchema);
+// crear modelo con ese esquema
+const Ad = mongoose.model('Anuncio', anuncioSchema);
 
 module.exports = Ad;
