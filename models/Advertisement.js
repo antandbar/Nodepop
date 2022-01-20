@@ -15,4 +15,10 @@ const anuncioSchema = mongoose.Schema({
 // crear modelo con ese esquema
 const Ad = mongoose.model('Anuncio', anuncioSchema);
 
+// crear método estático para listar tags
+anuncioSchema.statics.tags = function() {
+  //return Ad.find({tags:{ $exists: true }}, {_id:0,tags:1});
+  return Ad.find();
+}
+
 module.exports = Ad;
