@@ -26,6 +26,7 @@ router.get('/', async (req, res, next) => {
     try {
   
       const ad = await Ad.tags();
+      
     
       res.json({ results: ad })
     
