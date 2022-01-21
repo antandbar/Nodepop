@@ -1,7 +1,7 @@
 'use strict';
 
 require('../lib/connectMongoose');
-const Ad = require('../models/Advertisement')
+const Ad = require('../models/Ad')
 
 
 async function initAd() {

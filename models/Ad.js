@@ -19,8 +19,12 @@ adSchema.statics.tags = function() {
 }
 
 // crear método estático para listar anuncios
-adSchema.statics.adfilters = function(filtros) {
-  return Ad.find(filtros);
+adSchema.statics.adfilters = function(filtros, skip, limit) {
+  const query = Ad.find(filtros);
+  query.skip(skip);
+  query.limit(limit);
+
+  return query.exec();
 }
 
 // crear modelo con ese esquema

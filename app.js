@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var advertisements = require('./routes/api/advertisements');
+var advertisements = require('./routes/api/ads');
 const { isAPIRequest } = require('./lib/utils');
 var app = express();
 require('./lib/connectMongoose');

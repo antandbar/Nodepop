@@ -2,7 +2,7 @@
 
 const express = require('express');
 const createError = require('http-errors');
-const Ad = require('../../models/Advertisement');
+const Ad = require('../../models/Ad');
 
 const router = express.Router();
 
@@ -12,12 +12,18 @@ router.get('/', async (req, res, next) => {
     try {
 
       const name = req.query.name;
+      const tag = req.query.tag;
+      const adtype = req.query.adtype;
+      const skip = req.query.skip;
+      const limit = req.query.limit;
 
       const filters = {}
       
-      if (name) filters.name = name;
+      if(name) filters.name = name;
+      if(tag) filters.tag = tag;
+      if(adtype) filters.adtype = adtype;
 
-      const ad = await Ad.adfilters(filters);
+      const ad = await Ad.adfilters(filters, skip, limit);
     
       res.json({ results: ad })
   
