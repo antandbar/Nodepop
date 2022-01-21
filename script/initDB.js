@@ -15,17 +15,17 @@ async function initAd() {
         await Ad.insertMany(
         [
             {
-            "nombre": "Bicicleta",
-            "venta": true,
-            "precio": 230.15,
-            "foto": "bici.jpg",
+            "name": "Bicicleta",
+            "sale": true,
+            "price": 230.15,
+            "photo": "bici.jpg",
             "tags": [ "lifestyle", "motor"]
             },
             {
-            "nombre": "iPhone 3GS",
-            "venta": false,
-            "precio": 50.00,
-            "foto": "iphone.png",
+            "name": "iPhone 3GS",
+            "sale": false,
+            "price": 50.00,
+            "photo": "iphone.png",
             "tags": [ "lifestyle", "mobile"]
             }
         ]

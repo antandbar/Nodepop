@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 /**
  * Rutas de mi API
  */
- app.use('/apiv1/anuncios', advertisements);
+ app.use('/apiv1/ads', advertisements);
 
 /**
  * Rutas de mi website

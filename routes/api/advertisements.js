@@ -7,13 +7,19 @@ const Ad = require('../../models/Advertisement');
 const router = express.Router();
 
 // GET /api/anuncios
-// Devuelve una lista de agentes
+// Devuelve una lista de Anuncios
 router.get('/', async (req, res, next) => {
     try {
-  
-    const ad = await Ad.find();
-  
-    res.json({ results: ad })
+
+      const name = req.query.name;
+
+      const filters = {}
+      
+      if (name) filters.name = name;
+
+      const ad = await Ad.adfilters(filters);
+    
+      res.json({ results: ad })
   
     } catch (err) {
       next(err);
@@ -22,7 +28,7 @@ router.get('/', async (req, res, next) => {
 
 // GET /api/anuncios/tag
 // Devuelve lista de tags existentes
-  router.get('/tags', async (req, res, next) => {
+  router.get('/tagslist', async (req, res, next) => {
     try {
   
       const ad = await Ad.tags();
