@@ -15,14 +15,16 @@ const adSchema = mongoose.Schema({
 
 // crear método estático para listar tags
 adSchema.statics.tags = function() {
-   return Ad.distinct("tags");
+   return Ad.distinct('tags');
 }
 
 // crear método estático para listar anuncios
-adSchema.statics.adfilters = function(filtros, skip, limit) {
+adSchema.statics.adfilters = function(filtros, skip, limit, select, sort) {
   const query = Ad.find(filtros);
   query.skip(skip);
   query.limit(limit);
+  query.select(select);
+  query.sort(sort);
 
   return query.exec();
 }

@@ -12,18 +12,23 @@ router.get('/', async (req, res, next) => {
     try {
 
       const name = req.query.name;
-      const tag = req.query.tag;
-      const adtype = req.query.adtype;
+      const sale = req.query.sale;
+      const price = req.query.price;
+      const tags = req.query.tags;      
       const skip = req.query.skip;
       const limit = req.query.limit;
-
+      const select = req.query.select;
+      const sort = req.query.sort;
+      console.log(price);
       const filters = {}
       
       if(name) filters.name = name;
-      if(tag) filters.tag = tag;
-      if(adtype) filters.adtype = adtype;
+      if(sale) filters.sale = sale;
+      if(tags) filters.tags = tags; 
+      if(price) filters.price = price;
+      
 
-      const ad = await Ad.adfilters(filters, skip, limit);
+      const ad = await Ad.adfilters(filters, skip, limit, select, sort);
     
       res.json({ results: ad })
   
