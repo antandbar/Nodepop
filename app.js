@@ -7,7 +7,10 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var advertisements = require('./routes/api/ads');
 const { isAPIRequest } = require('./lib/utils');
+const swaggerMiddleware = require('./lib/swaggerMiddleware');
+
 var app = express();
+
 require('./lib/connectMongoose');
 
 
@@ -21,6 +24,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/api-docs', swaggerMiddleware);
 
 
 /**
