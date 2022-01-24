@@ -1,10 +1,35 @@
 var express = require('express');
 const { query, validationResult } = require('express-validator');
 var router = express.Router();
+const Ad = require('../models/Ad');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/', async function(req, res, next) {
+  try{
+    const name = req.query.name;
+    const sale = req.query.sale;
+    const price = req.query.price;
+    const tags = req.query.tags;      
+    const skip = req.query.skip;
+    const limit = req.query.limit;
+    const select = req.query.select;
+    const sort = req.query.sort;
+    
+    const filters = {}
+    
+    if(name) filters.name = name;
+    if(sale) filters.sale = sale;
+    if(tags) filters.tags = tags; 
+    if(price) filters.price = {$lte: price};
+    console.log(filters);
+
+    const ads = await Ad.adfilters(filters, skip, limit, select, sort);
+
+    res.render('index', { title: 'NodePop',
+                            ads:ads });
+} catch (err) {
+  next(err);
+  }
 });
 
 router.get('/adslist', [

@@ -14,10 +14,10 @@
     "tags": [ "lifestyle", "mobile"]
     },
     {
-        "name": "barco",
-        "sale": false,
-        "price": 500000.00,
-        "photo": "barco.png",
-        "tags": [ "lifestyle", "sea"]
-        }
+    "name": "barco",
+    "sale": false,
+    "price": 500000.00,
+    "photo": "barco.png",
+    "tags": [ "lifestyle", "sea"]
+    }
 ]

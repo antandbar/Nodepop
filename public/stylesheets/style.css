@@ -1,8 +1,53 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap');
+
+
+body, html {
+    font-family: "Source Sans Pro", Arial, Helvetica, sans-serif;
+    background-color:whitesmoke;
+    padding: 1rem;
 }
 
-a {
-  color: #00B7FF;
+h1, h2, h3, h4, h5, h6 {
+    font-family:  "Playfair Display", "Times New Roman", Garamond, serif; 
+}
+
+
+
+.ads-header {
+    padding: 2rem;
+}
+
+.ads-grid {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    grid-gap: 0.5rem;
+    padding: 0;
+    border: 1px solid black;
+    padding: 1rem;
+   
+}
+
+.ads-title-grid {
+    font-weight: bold;
+    font-size: 1.2rem;
+    border: 1px solid black;
+    text-align: center;
+    padding: 0.1rem;
+    background-color: grey;
+    color: whitesmoke;
+    
+}
+.ads-item {
+    text-align: center;
+    
+}
+
+footer {
+    position: fixed;
+    align-items: left;
+    left: 1rem;
+    bottom: 1rem;
+    font-size: 2vh;
+    text-align: left;
 }

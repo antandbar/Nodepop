@@ -1,11 +1,54 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/reset.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <header class="ads-header">
+      <h1>Bienvenido a <%= title %></h1>
+    </header>
+    <main class="ads-grid">
+      <div class="ads-title-grid">
+        Nombre
+      </div> 
+      <div class="ads-title-grid">
+        Venta 
+      </div>
+      <div class="ads-title-grid">
+        Foto 
+      </div>
+      <div class="ads-title-grid">
+      Precio 
+      </div>
+      <div class="ads-title-grid">
+       Tags  
+      </div>
+      <% ads.forEach( ad => { %>
+        <div class="ads-item">
+          <%= ad.name %>
+        </div> 
+        <div class="ads-item">
+          <%= ad.sale %>
+        </div>
+        <div class="ads-item">
+          <%= ad.photo %>
+        </div>
+        <div class="ads-item">
+          <%= ad.price %>
+        </div>
+        <div class="ads-item">
+           <%= ad.tags.join(' / ') %>  
+        </div>
+        
+      <% }) %>
+    </main>
   </body>
+  <footer>
+    &copy; NodePop
+  </footer>
 </html>
