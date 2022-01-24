@@ -6,6 +6,7 @@ const Ad = require('../models/Ad');
 /* GET home page. */
 router.get('/', async function(req, res, next) {
   try{
+    console.log(req.get('host'));
     const name = req.query.name;
     const sale = req.query.sale;
     const price = req.query.price;
@@ -24,9 +25,10 @@ router.get('/', async function(req, res, next) {
     console.log(filters);
 
     const ads = await Ad.adfilters(filters, skip, limit, select, sort);
-
+    
     res.render('index', { title: 'NodePop',
-                            ads:ads });
+                            ads:ads,
+                            url: `http://${req.get('host')}/images/ads/`});
 } catch (err) {
   next(err);
   }

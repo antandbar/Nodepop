@@ -30,13 +30,13 @@
       </div>
       <% ads.forEach( ad => { %>
         <div class="ads-item">
-          <%= ad.name %>
+           <%= ad.name %>
         </div> 
         <div class="ads-item">
           <%= ad.sale %>
         </div>
-        <div class="ads-item">
-          <%= ad.photo %>
+        <div class="ads-image">
+          <img  src= "<%= url %><%= ad.photo %>"" alt="">
         </div>
         <div class="ads-item">
           <%= ad.price %>
