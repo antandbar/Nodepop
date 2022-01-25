@@ -3,7 +3,7 @@
     "name": "Bicicleta",
     "sale": true,
     "price": 230.15,
-    "photo": "bici.jpg",
+    "photo": "bicicleta.jpeg",
     "tags": [ "lifestyle", "motor"]
     },
     {
@@ -14,10 +14,25 @@
     "tags": [ "lifestyle", "mobile"]
     },
     {
-    "name": "barco",
+    "name": "Barco",
     "sale": false,
-    "price": 500000.00,
+    "price": 5000.00,
     "photo": "barco.png",
     "tags": [ "lifestyle", "sea"]
+    },
+    {
+    "name": "Libro",
+    "sale": true,
+    "price": 20.00,
+    "photo": "libro.jpeg",
+    "tags": [ "leisure", "reading"]
+    }
+    ,
+    {
+    "name": "Laptop",
+    "sale": true,
+    "price": 800.00,
+    "photo": "laptop.jpeg",
+    "tags": [ "lifestyle", "computing"]
     }
 ]

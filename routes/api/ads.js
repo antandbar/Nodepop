@@ -37,7 +37,7 @@ router.get('/', async (req, res, next) => {
     for(let ad of ads) {
       ad.photo = getUrlPhotos(req, ad.photo);
     }  
-    
+
     res.json({ results: ads })
 
   } catch (err) {
@@ -45,7 +45,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-// GET /apiv1/ads
+// GET /apiv1/tagslist
 // Devuelve lista de tags existentes
   router.get('/tagslist', async (req, res, next) => {
     try {
@@ -59,13 +59,12 @@ router.get('/', async (req, res, next) => {
 });
 
 
-  // POST /apiv1/anuncios
+// POST /apiv1/ads
 // Crea un nuevo anuncio
-router.post('/', async (req, res, next) => {
+router.post('/' ,async (req, res, next) => {
   try {
     const adData = req.body;
 
-    // creo un objeto de agente EN MEMORIA
     const ad = new Ad(adData);
 
     const adGuardado = await ad.save();
@@ -76,8 +75,5 @@ router.post('/', async (req, res, next) => {
     next(err);
   }
 })
-
-
-
 
 module.exports = router;
