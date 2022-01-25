@@ -76,6 +76,19 @@ paths:
         500:
           description: 'Server Error'
 
+# [GET] ads/tagslist
+  /apiv1/ads/tagslist:
+    get:
+      tags:
+      - ads
+      summary: Find All tags
+      parameters:
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
 # [POST] ads
     post:
       tags:
@@ -121,22 +134,25 @@ paths:
 
 # definitions
 definitions:
-  users:
+  Ads:
     type: object
     required:
-        - email
-        - password
     properties:
-      id:
-        type: integer
-        description: user Id
-      email:
+      name:
         type: string
-        description: user Email
-      password:
+        description: ad name
+      sale:
+        type: boolean
+        description: ad sales
+      price:
+        type: float
+        description: ad price
+      photo:
         type: string
-        description: user Password
+        description: ad photo
+      tags:
+        type: array<string>
+        description: ad tags
 
 schemes:
- - https
  - http
