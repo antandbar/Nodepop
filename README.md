@@ -24,32 +24,45 @@ Init DB:
 npm run initdb
 ```
 
-* ATENCION * Esto borrará todos los datos de la BD y cargará el estado inicial.
+* ATTENTION * This will erase all data from the DB and load the initial state.
 
-## Métodos del API
+## API methods
 
-El API se accede en /api
+The API is accessed at /apiv1
 
-Lista de anuncios:
+Documentation:
 
-- /apiv1/ads
+- /api-docs/
 
-Filtros:
+Examples /apiv1/ads:
+
+Filters:
 - http://localhost:3000/apiv1/ads/?name=Bicicleta&sale=true&tags=motor&minprice=50&maxprice=500
 
-Paginación:
+Pagination:
 - http://localhost:3000/apiv1/ads/?skip=1&limit=1
 
-Eligiendo que campos quiero:
-- http://localhost:3000/api/agentes/?select=name -_id address
+Select fields:
+- http://localhost:3000/apiv1/ads/?select=photos name 
 
-Ordenación:
-- http://localhost:3000/apiv1/ads/?sort=price name
+Sort:
+- http://localhost:3000/apiv1/ads/?sort=price 
 
-Lista de tags existentes
 
-- /api/agentes/tags
+## web
 
-Crear un anuncio:
+- /
 
-- POST /api/anuncios
+Examples / :
+
+Filters:
+- http://localhost:3000/?name=Bicicleta&sale=true&tags=motor&minprice=50&maxprice=500
+
+Pagination:
+- http://localhost:3000/?skip=1&limit=1
+
+Select fields:
+- http://localhost:3000/?select=photos name 
+
+Sort:
+- http://localhost:3000/?sort=price 

@@ -4,7 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var advertisements = require('./routes/api/ads');
 const { isAPIRequest } = require('./lib/utils');
 const swaggerMiddleware = require('./lib/swaggerMiddleware');
@@ -36,7 +35,6 @@ app.use('/api-docs', swaggerMiddleware);
  * Rutas de mi website
  */
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
