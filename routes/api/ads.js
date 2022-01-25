@@ -45,7 +45,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-// GET /apiv1/tagslist
+// GET /apiv1/ads/tagslist
 // Devuelve lista de tags existentes
   router.get('/tagslist', async (req, res, next) => {
     try {

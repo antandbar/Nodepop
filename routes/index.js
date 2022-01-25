@@ -6,7 +6,7 @@ const { getUrlPhotos } = require('../lib/utils');
 /* GET home page. */
 router.get('/', async function(req, res, next) {
   try{
-
+    
     const name = req.query.name;
     const sale = req.query.sale;
     const minprice = req.query.minprice;

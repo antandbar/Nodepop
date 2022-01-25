@@ -1,107 +1,123 @@
 tags:
-- name: users
-  description: users API
+- name: ads
+  description: ads API
 
 paths:
-# [GET] users
-  /users:
+# [GET] ads
+  /apiv1/ads:
     get:
       tags:
-      - users
-      summary: Find All Users
+      - ads
+      summary: Find All ads
+      parameters:
+      - name: name
+        in: request
+        description: ad name
+        required: false
+        type: string
+        example: 'bicicleta'
+      - name: sale
+        in: request
+        description: ad sale
+        required: false
+        type: boolean
+        example: 'true'
+      - name: photo
+        in: request
+        description: ad photo
+        required: false
+        type: string
+        example: 'bicicleta.jpeg'
+      - name: tags
+        in: request
+        description: ad tags
+        required: false
+        type: array<string>
+        example: ['lifestyle', 'motor']
+      - name: minprice
+        in: request
+        description: ad minprice
+        required: false
+        type: float
+        example: ['230.00']
+      - name: maxprice
+        in: request
+        description: ad maxprice
+        required: false
+        type: float
+        example: '500.00'
+      - name: skip
+        in: request
+        description: ad skip
+        required: false
+        type: integer
+        example: '1'
+      - name: limit
+        in: request
+        description: ad limit
+        required: false
+        type: integer
+        example: '3'
+      - name: select
+        in: request
+        description: ad select field
+        required: false
+        type: field
+        example: 'name'
+      - name: sort
+        in: request
+        description: ad sort field
+        required: false
+        type: field
+        example: 'name'
       responses:
         200:
           description: 'OK'
         500:
           description: 'Server Error'
 
-# [POST] users
+# [POST] ads
     post:
       tags:
-      - users
-      summary: Add User
+      - ads
+      summary: Add Ad
       parameters:
       - name: body
         in: body
-        description: user Data
+        description: ad Data
         required: true
         schema:
-          $ref: '#/definitions/users'
+          type: object
+          properties:
+            name: 
+              type: string
+              descirption: ad name
+              example: 'bicicleta'
+            sale: 
+              type: boolean
+              descirption: ad sale
+              example: 'true'
+            price: 
+              type: float
+              descirption: ad price
+              example: '20.00'
+            photo: 
+              type: string
+              descirption: ad photo
+              example: 'bicicleta.jpeg'
+            tags: 
+              type: array<string>
+              descirption: ad tags
+              example: ['lifestyle', 'motor']
       responses:
         201:
           description: 'Created'
         400:
           description: 'Bad Request'
-        409:
-          description: 'Conflict'
         500:
           description: 'Server Error'
 
-# [GET] users/id
-  /users/{id}:
-    get:
-      tags:
-      - users
-      summary: Find User By Id
-      parameters:
-      - name: id
-        in: path
-        description: User Id
-        required: true
-        type: integer
-      responses:
-        200:
-          description: 'OK'
-        409:
-          description: 'Conflict'
-        500:
-          description: 'Server Error'
 
-# [PUT] users/id
-    put:
-      tags:
-      - users
-      summary: Update User By Id
-      parameters:
-      - name: id
-        in: path
-        description: user Id
-        required: true
-        type: integer
-      - name: body
-        in: body
-        description: user Data
-        required: true
-        schema:
-          $ref: '#/definitions/users'
-      responses:
-        200:
-          description: 'OK'
-        400:
-          description: 'Bad Request'
-        409:
-          description: 'Conflict'
-        500:
-          description: 'Server Error'
-
-# [DELETE] users/id
-    delete:
-      tags:
-      - users
-      summary: Delete User By Id
-      parameters:
-      - name: id
-        in: path
-        description: user Id
-        required: true
-        type: integer
-      responses:
-        200:
-          description: 'OK'
-        409:
-          description: 'Conflict'
-        500:
-          description: 'Server Error'
 
 # definitions
 definitions:
