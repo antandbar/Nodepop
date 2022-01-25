@@ -3,17 +3,19 @@
 const express = require('express');
 const createError = require('http-errors');
 const Ad = require('../../models/Ad');
+const { getUrlPhotos } = require('../../lib/utils');
 
 const router = express.Router();
 
-// GET /api/anuncios
+// GET /apiv1/ads
 // Devuelve una lista de Anuncios
 router.get('/', async (req, res, next) => {
   try {
 
     const name = req.query.name;
     const sale = req.query.sale;
-    const price = req.query.price;
+    const minprice = req.query.minprice;
+    const maxprice = req.query.maxprice;
     const tags = req.query.tags;      
     const skip = req.query.skip;
     const limit = req.query.limit;
@@ -22,40 +24,42 @@ router.get('/', async (req, res, next) => {
     
     const filters = {}
     
-    if(name) filters.name = name;
+    if(name) filters.name = new RegExp('^' +req.query.name, "i");
     if(sale) filters.sale = sale;
     if(tags) filters.tags = tags; 
-    if(price) filters.price = {$lte: price};
-    console.log(filters);
+    if(minprice) filters.price = {$gte: minprice};
+    if(maxprice) filters.price = {$lte: maxprice};
+    if(minprice && maxprice) filters.price = {$gte: minprice, $lte: maxprice};
     
 
-    const ad = await Ad.adfilters(filters, skip, limit, select, sort);
+    const ads = await Ad.adfilters(filters, skip, limit, select, sort);
   
-    res.json({ results: ad })
+    for(let ad of ads) {
+      ad.photo = getUrlPhotos(req, ad.photo);
+    }  
+    
+    res.json({ results: ads })
 
   } catch (err) {
     next(err);
   }
-    
-  });
+});
 
-// GET /api/anuncios/tag
+// GET /apiv1/ads
 // Devuelve lista de tags existentes
   router.get('/tagslist', async (req, res, next) => {
     try {
-  
       const ad = await Ad.tags();
       
-    
       res.json({ results: ad })
     
       } catch (err) {
         next(err);
       }
-    });
+});
 
 
-  // POST /api/anuncios
+  // POST /apiv1/anuncios
 // Crea un nuevo anuncio
 router.post('/', async (req, res, next) => {
   try {

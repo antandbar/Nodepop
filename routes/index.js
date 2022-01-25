@@ -2,6 +2,7 @@ var express = require('express');
 const { query, validationResult } = require('express-validator');
 var router = express.Router();
 const Ad = require('../models/Ad');
+const { getUrlPhotos } = require('../lib/utils');
 
 /* GET home page. */
 router.get('/', async function(req, res, next) {
@@ -25,10 +26,12 @@ router.get('/', async function(req, res, next) {
     console.log(filters);
 
     const ads = await Ad.adfilters(filters, skip, limit, select, sort);
+
+    for(let ad of ads) {
+      ad.photo = getUrlPhotos(req, ad.photo);
+    } 
     
-    res.render('index', { title: 'NodePop',
-                            ads:ads,
-                            url: `http://${req.get('host')}/images/ads/`});
+    res.render('index', { title: 'NodePop', ads:ads});
 } catch (err) {
   next(err);
   }
