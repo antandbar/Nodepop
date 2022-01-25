@@ -11,61 +11,61 @@ paths:
       summary: Find All ads
       parameters:
       - name: name
-        in: request
+        in: query
         description: ad name
         required: false
         type: string
         example: 'bicicleta'
       - name: sale
-        in: request
+        in: query
         description: ad sale
         required: false
         type: boolean
         example: 'true'
       - name: photo
-        in: request
+        in: query
         description: ad photo
         required: false
         type: string
         example: 'bicicleta.jpeg'
       - name: tags
-        in: request
+        in: query
         description: ad tags
         required: false
         type: array<string>
         example: ['lifestyle', 'motor']
       - name: minprice
-        in: request
+        in: query
         description: ad minprice
         required: false
         type: float
         example: ['230.00']
       - name: maxprice
-        in: request
+        in: query
         description: ad maxprice
         required: false
         type: float
         example: '500.00'
       - name: skip
-        in: request
+        in: query
         description: ad skip
         required: false
         type: integer
         example: '1'
       - name: limit
-        in: request
+        in: query
         description: ad limit
         required: false
         type: integer
         example: '3'
       - name: select
-        in: request
+        in: query
         description: ad select field
         required: false
         type: field
         example: 'name'
       - name: sort
-        in: request
+        in: query
         description: ad sort field
         required: false
         type: field
@@ -76,18 +76,6 @@ paths:
         500:
           description: 'Server Error'
 
-# [GET] ads/tagslist
-  /apiv1/ads/tagslist:
-    get:
-      tags:
-      - ads
-      summary: Find All tags
-      parameters:
-      responses:
-        200:
-          description: 'OK'
-        500:
-          description: 'Server Error'
 
 # [POST] ads
     post:
@@ -130,8 +118,18 @@ paths:
         500:
           description: 'Server Error'
 
-
-
+# [GET] ads/tagslist
+  /apiv1/ads/tagslist:
+    get:
+      tags:
+      - ads
+      summary: Find All tags
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+          
 # definitions
 definitions:
   Ads:

@@ -31,13 +31,12 @@ router.get('/', async (req, res, next) => {
     if(maxprice) filters.price = {$lte: maxprice};
     if(minprice && maxprice) filters.price = {$gte: minprice, $lte: maxprice};
     
-
     const ads = await Ad.adfilters(filters, skip, limit, select, sort);
   
     for(let ad of ads) {
       ad.photo = getUrlPhotos(req, ad.photo);
     }  
-
+    
     res.json({ results: ads })
 
   } catch (err) {
