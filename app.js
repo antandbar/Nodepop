@@ -1,18 +1,14 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var indexRouter = require('./routes/index');
-var advertisements = require('./routes/api/ads');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const indexRouter = require('./routes/index');
+const ads = require('./routes/api/ads');
 const { isAPIRequest } = require('./lib/utils');
 const swaggerMiddleware = require('./lib/swaggerMiddleware');
-
-var app = express();
-
+const app = express();
 require('./lib/connectMongoose');
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,13 +19,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// swagger
 app.use('/api-docs', swaggerMiddleware);
 
 
 /**
  * Rutas de mi API
  */
- app.use('/apiv1/ads', advertisements);
+ app.use('/apiv1/ads', ads);
 
 /**
  * Rutas de mi website
@@ -46,14 +43,14 @@ app.use(function(err, req, res, next) {
 
     // gestionando error de validación
     if (err.array) {
-      // error de validación
       err.status = 422;
       const errInfo = err.array({ onlyFirstError: true })[0];
       err.message = `(${errInfo.location}) ${errInfo.param} ${errInfo.msg}`;
     }
   
     res.status(err.status || 500);
-      // si es un error en el API respondo JSON
+
+      // si es un error en el API responde JSON
     if (isAPIRequest(req)) {
       res.json({ error: err.message });
       return;

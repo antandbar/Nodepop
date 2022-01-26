@@ -22,24 +22,24 @@ paths:
         required: false
         type: boolean
         example: 'true'
-      - name: photo
+      - name: price
         in: query
-        description: ad photo
+        description: ad price
         required: false
-        type: string
-        example: 'bicicleta.jpeg'
+        type: float
+        example: '230.15'
       - name: tags
         in: query
         description: ad tags
         required: false
-        type: array<string>
+        type: array
         example: ['lifestyle', 'motor']
       - name: minprice
         in: query
         description: ad minprice
         required: false
         type: float
-        example: ['230.00']
+        example: '230.00'
       - name: maxprice
         in: query
         description: ad maxprice
@@ -73,6 +73,8 @@ paths:
       responses:
         200:
           description: 'OK'
+        422:
+          description: 'Unprocessable Entity'
         500:
           description: 'Server Error'
 
@@ -86,7 +88,7 @@ paths:
       - name: body
         in: body
         description: ad Data
-        required: true
+        required: false
         schema:
           type: object
           properties:
@@ -107,7 +109,7 @@ paths:
               descirption: ad photo
               example: 'bicicleta.jpeg'
             tags: 
-              type: array<string>
+              type: array
               descirption: ad tags
               example: ['lifestyle', 'motor']
       responses:
@@ -115,6 +117,10 @@ paths:
           description: 'Created'
         400:
           description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        422:
+          description: 'Unprocessable Entity'
         500:
           description: 'Server Error'
 

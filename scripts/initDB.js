@@ -7,11 +7,12 @@ const dbConnection = require('../lib/connectMongoose');
 // cargar modelos
 const Ad = require('../models/Ad')
 
+// capturar evento y llamar main
 dbConnection.once('open', () => {
   main().catch(err => console.log('Hubo un error', err));
 })
 
-
+// main
 async function main() {
   const deleteAds = await question('Estas seguro de que quieres borrar la base de datos? (si/no) ');
   if (!deleteAds) {
@@ -25,6 +26,7 @@ async function main() {
   dbConnection.close();
 }
 
+// borra y crea anuncios (incializa anuncios)
 async function initAds() {
   // borrar todos los documentos de anuncios que haya en la colección
   const deleted = await Ad.deleteMany();
@@ -37,6 +39,7 @@ async function initAds() {
     console.log(`No se han creado anuncios`);
 }
 
+// Pregunta antes de inicializar BBDD
 function question(text) {
   return new Promise((resolve, reject) => {
     // conectar readline a la consola

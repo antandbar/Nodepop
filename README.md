@@ -28,16 +28,16 @@ npm run initdb
 
 ## API methods
 
-The API is accessed at /apiv1
-
 Documentation:
 
 - /api-docs/
 
-Examples /apiv1/ads:
+Examples GET /apiv1/ads:
 
 Filters:
-- http://localhost:3000/apiv1/ads/?name=Bicicleta&sale=true&tags=motor&minprice=50&maxprice=500
+- http://localhost:3000/apiv1/ads/?name=bici&sale=true&tags=motor&minprice=50&maxprice=500
+
+- http://localhost:3000/apiv1/ads?tags=computing&tags=sea
 
 Pagination:
 - http://localhost:3000/apiv1/ads/?skip=1&limit=1
@@ -48,18 +48,45 @@ Select fields:
 Sort:
 - http://localhost:3000/apiv1/ads/?sort=price 
 
+Rules GET /apiv1/ads:
+ - price or minprice,maxprice
+
+Example POST /apiv1/ads:
+
+ - http://localhost:3000/apiv1/ads
+
+    {   
+    "name": "motocicleta",
+    "sale": true,
+    "price": 600,
+    "photo": "motocicleta.jpeg",
+    "tags": [  
+        "lifestyle",
+        "motor"  
+    ]  
+    }    
+
+Example GET /apiv1/ads/taglist:
+
+http://localhost:3000/apiv1/ads/tagslist
+
 
 ## web
 
 - /
 
-Examples / :
+Examples GET / :
 
 Filters:
-- http://localhost:3000/?name=Bicicleta&sale=true&tags=motor&minprice=50&maxprice=500
+- http://localhost:3000/?name=bici&sale=true&tags=motor&minprice=50&maxprice=500
+
+- http://localhost:3000/?tags=computing&tags=sea
 
 Pagination:
 - http://localhost:3000/?skip=1&limit=1
 
 Sort:
 - http://localhost:3000/?sort=price 
+
+Rules:
+ - price or minprice,maxprice

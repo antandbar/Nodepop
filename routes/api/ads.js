@@ -2,23 +2,26 @@
 
 const express = require('express');
 const { body, query, validationResult } = require('express-validator');
-//const createError = require('http-errors');
 const Ad = require('../../models/Ad');
 const { getUrlPhotos } = require('../../lib/utils');
 
 const router = express.Router();
 
 // GET /apiv1/ads
-// Devuelve una lista de Anuncios
-router.get('/',[query('sale').isNumeric().withMessage('debe ser numérico').optional({checkFalsy: true}),
-query('minprice').isNumeric().withMessage('debe ser numérico').optional({checkFalsy: true}),
-query('maxprice').isNumeric().withMessage('debe ser numérico').optional({checkFalsy: true}),
-query('skip').isNumeric().withMessage('debe ser numérico').optional({checkFalsy: true}),
-query('limit').isNumeric().withMessage('debe ser numérico').optional({checkFalsy: true})
+// Devuelve una lista de Anuncios con filtros
+router.get('/',[
+query('sale').isBoolean().withMessage('must be true or false').optional({checkFalsy: true}),
+query('price').isNumeric().withMessage('must be numeric').optional({checkFalsy: true}),
+query('minprice').isNumeric().withMessage('must be numeric').optional({checkFalsy: true}),
+query('maxprice').isNumeric().withMessage('must be numeric').optional({checkFalsy: true}),
+query('skip').isNumeric().withMessage('must be numeric').optional({checkFalsy: true}),
+query('limit').isNumeric().withMessage('must be numeric').optional({checkFalsy: true})
 ], async (req, res, next) => {
   
   try {
+    // lanza en caso de validar error
     validationResult(req).throw();
+    // recupera query
     const name = req.query.name;
     const sale = req.query.sale;
     const price = req.query.price;
@@ -31,7 +34,7 @@ query('limit').isNumeric().withMessage('debe ser numérico').optional({checkFals
     const sort = req.query.sort;
     
     const filters = {}
-    
+    // valida si req.query tiene data y guarda en objeto filter
     if(name) filters.name = new RegExp('^' +req.query.name, "i");
     if(sale) filters.sale = sale;
     if(tags) filters.tags = {$in: tags}; 
@@ -42,17 +45,46 @@ query('limit').isNumeric().withMessage('debe ser numérico').optional({checkFals
       if(maxprice) filters.price = {$lte: maxprice};
       if(minprice && maxprice) filters.price = {$gte: minprice, $lte: maxprice};
     }
-
-    
+   
+    // hace consulta
     const ads = await Ad.adfilters(filters, skip, limit, select, sort);
   
+    // setea url fotos
     for(let ad of ads) {
       if(ad.photo) {
         ad.photo = getUrlPhotos(req, ad.photo);
       }
     }  
     
+    // responde en Json
     res.json({ results: ads })
+
+  } catch (err) {
+    next(err);
+  }
+});
+
+// POST /apiv1/ads
+// Crea un nuevo anuncio
+router.post('/' ,
+[body('price').isNumeric().withMessage('must be numeric').optional({checkFalsy: true}),
+body('sale').isBoolean().withMessage('must be true or false').optional({checkFalsy: true})]
+, async (req, res, next) => {
+  try {
+    // lanza en caso de validar error
+    validationResult(req).throw();
+
+    // recupera parametros en body
+    const adData = req.body;
+
+    // crea objeto con datos a guardar
+    const ad = new Ad(adData);
+
+    // Guarda en BBDD
+    const adGuardado = await ad.save();
+
+    // devuelve json con objeto guardado
+    res.status(201).json({ result: adGuardado });
 
   } catch (err) {
     next(err);
@@ -61,39 +93,18 @@ query('limit').isNumeric().withMessage('debe ser numérico').optional({checkFals
 
 // GET /apiv1/ads/tagslist
 // Devuelve lista de tags existentes
-  router.get('/tagslist', async (req, res, next) => {
-    try {
-      
-      const ad = await Ad.tags();
-      
-      res.json({ results: ad })
-    
-      } catch (err) {
-        next(err);
-      }
-});
-
-
-// POST /apiv1/ads
-// Crea un nuevo anuncio
-router.post('/' ,
-[body('price').isNumeric().withMessage('debe ser numérico').optional({checkFalsy: true}),
-body('sale').isBoolean().withMessage('debe ser true o false').optional({checkFalsy: true})]
-, async (req, res, next) => {
+router.get('/tagslist', async (req, res, next) => {
   try {
-    validationResult(req).throw();
-
-    const adData = req.body;
-
-    const ad = new Ad(adData);
-
-    const adGuardado = await ad.save();
-
-    res.status(201).json({ result: adGuardado });
-
-  } catch (err) {
-    next(err);
-  }
-})
+    
+    // hace consulta
+    const ad = await Ad.tags();
+    
+    // devuelve json con listado de tags existentes
+    res.json({ results: ad })
+  
+    } catch (err) {
+      next(err);
+    }
+});
 
 module.exports = router;

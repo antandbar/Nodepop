@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 
-// definir un esquema
+// define un esquema
 const adSchema = mongoose.Schema({
   name: {type: String, index: true},
   sale: {type: Boolean, index: true},
@@ -13,12 +13,12 @@ const adSchema = mongoose.Schema({
 
 
 
-// crear método estático para listar tags
+// crea método estático para listar tags
 adSchema.statics.tags = function() {
    return Ad.distinct('tags');
 }
 
-// crear método estático para listar anuncios
+// crea método estático para listar anuncios
 adSchema.statics.adfilters = function(filtros, skip, limit, select, sort) {
   const query = Ad.find(filtros);
   query.skip(skip);
@@ -29,7 +29,7 @@ adSchema.statics.adfilters = function(filtros, skip, limit, select, sort) {
   return query.exec();
 }
 
-// crear modelo con ese esquema
+// crea modelo del esquema
 const Ad = mongoose.model('Ad', adSchema);
 
 module.exports = Ad;
