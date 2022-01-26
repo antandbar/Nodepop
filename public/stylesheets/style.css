@@ -12,8 +12,6 @@ h1, h2, h3, h4, h5, h6 {
     font-family:  "Playfair Display", "Times New Roman", Garamond, serif; 
 }
 
-
-
 .ads-header {
     padding: 2rem;
 }
@@ -51,13 +49,4 @@ h1, h2, h3, h4, h5, h6 {
     max-width: 3rem;
     max-height: 3rem;
     padding-top: 5rem;
-}
-
-footer {
-    position: fixed;
-    align-items: left;
-    left: 1rem;
-    bottom: 1rem;
-    font-size: 2vh;
-    text-align: left;
 }

@@ -1,12 +1,19 @@
 var express = require('express');
+const { query, validationResult } = require('express-validator');
 var router = express.Router();
 const Ad = require('../models/Ad');
 const { getUrlPhotos } = require('../lib/utils');
 
 /* GET home page. */
-router.get('/', async function(req, res, next) {
+router.get('/',[query('sale').isNumeric().withMessage('debe ser numérico').optional({checkFalsy: true}),
+query('minprice').isNumeric().withMessage('debe ser numérico').optional({checkFalsy: true}),
+query('maxprice').isNumeric().withMessage('debe ser numérico').optional({checkFalsy: true}),
+query('skip').isNumeric().withMessage('debe ser numérico').optional({checkFalsy: true}),
+query('limit').isNumeric().withMessage('debe ser numérico').optional({checkFalsy: true})
+], async function(req, res, next) {
+  
   try{
-    
+    validationResult(req).throw();
     const name = req.query.name;
     const sale = req.query.sale;
     const minprice = req.query.minprice;
@@ -14,7 +21,7 @@ router.get('/', async function(req, res, next) {
     const tags = req.query.tags;      
     const skip = req.query.skip;
     const limit = req.query.limit;
-    const select = req.query.select;
+    const select = null;
     const sort = req.query.sort;
     
     const filters = {}
@@ -30,7 +37,9 @@ router.get('/', async function(req, res, next) {
     const ads = await Ad.adfilters(filters, skip, limit, select, sort);
   
     for(let ad of ads) {
-      ad.photo = getUrlPhotos(req, ad.photo);
+      if(ad.photo) {
+        ad.photo = getUrlPhotos(req, ad.photo);
+      }
     }  
     
     res.render('index', { title: 'NodePop', ads:ads});

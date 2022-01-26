@@ -43,7 +43,7 @@ Pagination:
 - http://localhost:3000/apiv1/ads/?skip=1&limit=1
 
 Select fields:
-- http://localhost:3000/apiv1/ads/?select=photos name 
+- http://localhost:3000/apiv1/ads/?select= name -_id
 
 Sort:
 - http://localhost:3000/apiv1/ads/?sort=price 
@@ -60,9 +60,6 @@ Filters:
 
 Pagination:
 - http://localhost:3000/?skip=1&limit=1
-
-Select fields:
-- http://localhost:3000/?select=photos name 
 
 Sort:
 - http://localhost:3000/?sort=price 

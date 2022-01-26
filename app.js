@@ -43,6 +43,14 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
+
+    // gestionando error de validación
+    if (err.array) {
+      // error de validación
+      err.status = 422;
+      const errInfo = err.array({ onlyFirstError: true })[0];
+      err.message = `(${errInfo.location}) ${errInfo.param} ${errInfo.msg}`;
+    }
   
     res.status(err.status || 500);
       // si es un error en el API respondo JSON
