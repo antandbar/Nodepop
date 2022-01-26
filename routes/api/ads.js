@@ -21,6 +21,7 @@ query('limit').isNumeric().withMessage('debe ser numérico').optional({checkFals
     validationResult(req).throw();
     const name = req.query.name;
     const sale = req.query.sale;
+    const price = req.query.price;
     const minprice = req.query.minprice;
     const maxprice = req.query.maxprice;
     const tags = req.query.tags;      
@@ -33,11 +34,15 @@ query('limit').isNumeric().withMessage('debe ser numérico').optional({checkFals
     
     if(name) filters.name = new RegExp('^' +req.query.name, "i");
     if(sale) filters.sale = sale;
-    if(tags) filters.tags = {$in: tags};  
-    if(minprice) filters.price = {$gte: minprice};
-    if(maxprice) filters.price = {$lte: maxprice};
-    if(minprice && maxprice) filters.price = {$gte: minprice, $lte: maxprice};
-    console.log(filters);
+    if(tags) filters.tags = {$in: tags}; 
+    if(price) {
+      filters.price = price;
+    } else {
+      if(minprice) filters.price = {$gte: minprice};
+      if(maxprice) filters.price = {$lte: maxprice};
+      if(minprice && maxprice) filters.price = {$gte: minprice, $lte: maxprice};
+    }
+
     
     const ads = await Ad.adfilters(filters, skip, limit, select, sort);
   
