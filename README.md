@@ -60,10 +60,11 @@ Example POST /apiv1/ads:
     "sale": true,
     "price": 600,
     "photo": "motocicleta.jpeg",
-    "tags": [  
+    "tags":  
+        [  
         "lifestyle",
         "motor"  
-    ]  
+        ]  
     }    
 
 Example GET /apiv1/ads/taglist:
