@@ -9,6 +9,10 @@ const { isAPIRequest } = require('./lib/utils');
 const swaggerMiddleware = require('./lib/swaggerMiddleware');
 const app = express();
 require('./lib/connectMongoose');
+const LoginController = require('./controllers/loginController');
+
+const loginController = new LoginController();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,6 +30,7 @@ app.use('/api-docs', swaggerMiddleware);
 /**
  * Rutas de mi API
  */
+ app.post('/apiv1/login', loginController.postJWT)
  app.use('/apiv1/ads', ads);
 
 /**

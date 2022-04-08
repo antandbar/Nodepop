@@ -44,7 +44,7 @@ async function initUsers() {
       rol: 'admin'
     },
     {
-      email: 'user1@example.com',
+      email: 'user@example.com',
       password: await User.hashPassword('1234'),
       rol: 'user'
     }
