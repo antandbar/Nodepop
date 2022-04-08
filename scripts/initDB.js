@@ -6,6 +6,7 @@ const readline = require('readline');
 const dbConnection = require('../lib/connectMongoose');
 // cargar modelos
 const Ad = require('../models/Ad')
+const User = require('../models/User')
 
 // capturar evento y llamar main
 dbConnection.once('open', () => {
@@ -22,8 +23,34 @@ async function main() {
   // inicializar anuncios
   await initAds();
 
+  // inicializar usuarios
+  await initUsers();
+
   // desconectar la base de datos
   dbConnection.close();
+}
+
+// borra y crea usuarios (incializa usuarios)
+async function initUsers() {
+  // borrar los usuarios existentes
+  const deleted = await User.deleteMany();
+  console.log(`Eliminados ${deleted.deletedCount} usuarios.`);
+
+  // crear usuarios
+  const users = await User.insertMany([
+    {
+      email: 'admin@example.com',
+      password: await User.hashPassword('1234'),
+      rol: 'admin'
+    },
+    {
+      email: 'user1@example.com',
+      password: await User.hashPassword('1234'),
+      rol: 'user'
+    }
+  ]);
+  users.length ? console.log(`Creados ${users.length} usuarios`) :
+    console.log(`No se han creado usuarios`);
 }
 
 // borra y crea anuncios (incializa anuncios)
