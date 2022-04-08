@@ -10,6 +10,8 @@ const swaggerMiddleware = require('./lib/swaggerMiddleware');
 const app = express();
 require('./lib/connectMongoose');
 const LoginController = require('./controllers/loginController');
+const jwtAuth = require('./lib/jwtAuth');
+
 
 const loginController = new LoginController();
 
@@ -31,7 +33,7 @@ app.use('/api-docs', swaggerMiddleware);
  * Rutas de mi API
  */
  app.post('/apiv1/login', loginController.postJWT)
- app.use('/apiv1/ads', ads);
+ app.use('/apiv1/ads',jwtAuth, ads);
 
 /**
  * Rutas de mi website
