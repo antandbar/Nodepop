@@ -9,6 +9,7 @@ const { isAPIRequest } = require('./lib/utils');
 const swaggerMiddleware = require('./lib/swaggerMiddleware');
 const app = express();
 require('./lib/connectMongoose');
+const i18n = require('./lib/i18nConfigure')
 const LoginController = require('./controllers/loginController');
 const jwtAuth = require('./lib/jwtAuth');
 
@@ -35,10 +36,14 @@ app.use('/api-docs', swaggerMiddleware);
  app.post('/apiv1/login', loginController.postJWT)
  app.use('/apiv1/ads',jwtAuth, ads);
 
+// Setup de i18n
+app.use(i18n.init)
+
 /**
  * Rutas de mi website
  */
 app.use('/', indexRouter);
+app.use('/change-locale', require('./routes/change-locale'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

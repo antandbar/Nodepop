@@ -1,52 +1,66 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap');
 
-
-body, html {
-    font-family: "Source Sans Pro", Arial, Helvetica, sans-serif;
-    background-color:whitesmoke;
-    padding: 1rem;
+body,
+html {
+  font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;
+  background-color: whitesmoke;
+  padding: 1rem;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family:  "Playfair Display", "Times New Roman", Garamond, serif; 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Playfair Display', 'Times New Roman', Garamond, serif;
 }
 
 .ads-header {
-    padding: 2rem;
+  padding: 1rem;
+  text-align: center;
 }
 
+.ads-locale {
+  text-align: right;
+}
+
+.ads-locale > a:link {
+  text-decoration: none;
+}
+
+.ads-locale a:hover {
+  text-decoration: underline;
+  color: black;
+}
+
+
 .ads-grid {
-    display: grid;
-    grid-template-columns: auto auto auto auto auto;
-    grid-gap: 0.5rem;
-    padding: 0;
-    border: 1px solid black;
-    padding: 3rem;
-    
-   
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  grid-gap: 0.5rem;
+  padding: 0;
+  border: 1px solid black;
+  padding: 3rem;
 }
 
 .ads-title-grid {
-    font-weight: bold;
-    font-size: 1.2rem;
-    border: 1px solid black;
-    text-align: center;
-    padding: 0.1rem;
-    background-color: grey;
-    color: whitesmoke;
-    
-    
+  font-weight: bold;
+  font-size: 1.2rem;
+  border: 1px solid black;
+  text-align: center;
+  padding: 0.1rem;
+  background-color: grey;
+  color: whitesmoke;
 }
 .ads-item {
-    text-align: center;
-    padding-top: 5rem;
- 
-    
+  text-align: center;
+  padding-top: 5rem;
 }
 .ads-image {
-    margin-left: 40%;
-    max-width: 3rem;
-    max-height: 3rem;
-    padding-top: 5rem;
+  margin-left: 40%;
+  max-width: 3rem;
+  max-height: 3rem;
+  padding-top: 5rem;
 }

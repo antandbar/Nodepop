@@ -12,24 +12,27 @@
 
   <body>
     <header class="ads-header">
-      <h1>Bienvenido a <%= title %></h1>
+      <h1><%= __('Welcome to')%> <%= title %></h1>
     </header>
 
+    <div class="ads-locale"><% getLocales().forEach(locale => { %>
+      <a href="/change-locale/<%= locale %>">|<%= locale.toUpperCase() %>|</a>
+    <% }) %> </div>
     <main class="ads-grid">
       <div class="ads-title-grid">
-        Nombre
+        <%= __('Name')%>
       </div> 
       <div class="ads-title-grid">
-        Venta 
+        <%= __('Sale')%>
       </div>
       <div class="ads-title-grid">
-        Foto 
+        <%= __('Photo')%> 
       </div>
       <div class="ads-title-grid">
-      Precio 
+        <%= __('Price')%>
       </div>
       <div class="ads-title-grid">
-       Tags  
+        <%= __('Tags')%>  
       </div>
       <% ads.forEach( ad => { %>
         <div class="ads-item">
