@@ -1,5 +1,6 @@
 'use strict';
 
+require('dotenv').config();
 const adsData = require('./initDB.ads.json');
 const readline = require('readline');
 // conexión a la base de datos
