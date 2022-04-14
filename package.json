@@ -6,8 +6,8 @@
     "start": "node ./bin/www",
     "dev": "cross-env DEBUG=nodepop:* nodemon",
     "initdb": "node ./scripts/initDB.js",
-    "test:int": "jest integration",
-    "test:int:watch": "jest integration --watch --detectOpenHandles"
+    "test:int": "cross-env NODE_ENV=test jest integration --silent",
+    "test:int:watch": "cross-env NODE_ENV=test jest integration --watch --silent"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
