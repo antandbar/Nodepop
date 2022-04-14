@@ -2,8 +2,6 @@ require('dotenv').config();
 const request = require('supertest');
 const app = require('../../app');
 
-/* expect.assertions(3); */
-
 describe('/ads Testeando ads', () => {
   let token;
 
@@ -35,7 +33,6 @@ describe('/ads Testeando ads', () => {
       .get('/apiv1/ads/tagslist')
       .set('Authorization', token);
 
-    
     expect(response.statusCode).toBe(200);
     expect(response.body).toHaveProperty('results');
   });
