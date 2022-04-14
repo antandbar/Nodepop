@@ -53,7 +53,7 @@ Example GET /apiv1/ads/taglist:
 
 http://localhost:3000/apiv1/ads/tagslist
 
-## API integrations test
+## API integration test
 
 - npm run test:int
 
