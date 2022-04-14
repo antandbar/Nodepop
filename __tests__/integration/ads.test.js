@@ -1,3 +1,5 @@
+"use strict";
+
 require('dotenv').config();
 const request = require('supertest');
 const app = require('../../app');
@@ -28,10 +30,10 @@ beforeEach(async () => {
   ]);
 });
 
-describe('/ads testing ads', () => {
+describe('testing nodepop', () => {
   let token;
 
-  it('Post must return token', async () => {
+  it('Post /apiv1/login must return token', async () => {
     expect.assertions(1);
     const response = await request(app)
       .post('/apiv1/login')
@@ -42,8 +44,8 @@ describe('/ads testing ads', () => {
     expect(response.statusCode).toBe(200);
   });
 
-  describe('GET /ads', () => {
-    it('GET must check the number of ads and have the results property', async () => {
+  describe('GET /apiv1/ads', () => {
+    it('must check the number of ads and have the results property', async () => {
       expect.assertions(3);
       const response = await request(app)
         .get('/apiv1/ads')
@@ -54,7 +56,7 @@ describe('/ads testing ads', () => {
       expect(response.body.results).toHaveLength(adsData.length);
     });
 
-    it('GET must return that the name of one of the ads is Bicicleta', async () => {
+    it('must return that the name of one of the ads is Bicicleta', async () => {
       expect.assertions(2);
       const response = await request(app)
         .get('/apiv1/ads')
@@ -66,7 +68,7 @@ describe('/ads testing ads', () => {
     });
   });
 
-  it('GET must return ok and have the results property', async () => {
+  it('GET /apiv1/ads/tagslist must return ok and have the results property', async () => {
     expect.assertions(2);
     const response = await request(app)
       .get('/apiv1/ads/tagslist')
@@ -76,7 +78,7 @@ describe('/ads testing ads', () => {
     expect(response.body).toHaveProperty('results');
   });
 
-  it('Post must insert an ad', async () => {
+  it('Post /apiv1/ads must insert an ad', async () => {
     expect.assertions(2);
     const response = await request(app)
       .post('/apiv1/ads')
