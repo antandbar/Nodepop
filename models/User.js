@@ -11,13 +11,13 @@ const userSchema = mongoose.Schema({
 })
 
 // método estático
-userSchema.statics.hashPassword = function(passwordEnClaro) {
-  return bcrypt.hash(passwordEnClaro, 7);
+userSchema.statics.hashPassword = async function(passwordClear) {
+  return await bcrypt.hash(passwordClear, 10);
 }
 
 // método de instancia
-userSchema.methods.comparePassword = function(passwordEnClaro) {
-  return bcrypt.compare(passwordEnClaro, this.password);
+userSchema.methods.comparePassword = async function(passwordClear) {
+  return await bcrypt.compare(passwordClear, this.password);
 }
 
 // creo el modelo

@@ -12,13 +12,13 @@ class LoginController {
       // buscar el usuario en la BD
       const usuario = await User.findOne({ email });
 
-      // si no lo encuentro o no coincide la contraseña --> error
+      // si no se encuentra o no coincide la contraseña --> error
       if (!usuario || !(await usuario.comparePassword(password))) {
         res.status(401).json({ error: 'invalid credentials' });
         return;
       }
 
-      // generamos un JWT con su _id
+      // se genera un JWT con su _id
       jwt.sign(
         { _id: usuario._id },
         process.env.JWT_SECRET,
@@ -30,7 +30,7 @@ class LoginController {
             next(err);
             return;
           }
-          // devolver al cliente es token generado
+          // se devuelve al cliente es token generado
           res.json({ token: jwtToken });
         },
       );
