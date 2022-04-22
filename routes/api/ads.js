@@ -4,8 +4,23 @@ const express = require('express');
 const { body, query, validationResult } = require('express-validator');
 const Ad = require('../../models/Ad');
 const { getUrlPhotos } = require('../../lib/utils');
-
 const router = express.Router();
+const multer = require('multer');
+const path = require('path');
+const mimeTypes = require('mime-types');
+
+// Se parametriza multer
+const storage = multer.diskStorage({
+  destination: path.join(__dirname, '../../public/images','ads'),
+  filename: function(req,file,cb) {
+    cb('',`${Date.now() + file.originalname.replace(/\.[^/.]+$/, "")}.${mimeTypes.extension(file.mimetype)}`);
+  }
+});
+
+const upload = multer({
+  storage:storage
+})
+
 
 // GET /apiv1/ads
 // Devuelve una lista de Anuncios con filtros
@@ -66,7 +81,7 @@ query('limit').isNumeric().withMessage('must be numeric').optional({checkFalsy: 
 
 // POST /apiv1/ads
 // Crea un nuevo anuncio
-router.post('/' ,
+router.post('/' , upload.single('photo'),
 [body('price').isNumeric().withMessage('must be numeric').optional({checkFalsy: true}),
 body('sale').isBoolean().withMessage('must be true or false').optional({checkFalsy: true})]
 , async (req, res, next) => {
@@ -75,7 +90,8 @@ body('sale').isBoolean().withMessage('must be true or false').optional({checkFal
     validationResult(req).throw();
 
     // recupera parametros en body
-    const adData = req.body;
+    const adData = {...req.body,
+    ...(typeof(req.file) !== 'undefined' && {photo:req.file.filename})};
 
     // crea objeto con datos a guardar
     const ad = new Ad(adData);
