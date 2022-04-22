@@ -8,6 +8,7 @@ const User = require('../../models/User');
 const Ad = require('../../models/Ad');
 const adsData = require('../../scripts/initDB.ads.json');
 
+
 beforeEach(async () => {
   // borrar todos los documentos de anuncios que haya en la colección
   await Ad.deleteMany();
@@ -98,4 +99,5 @@ describe('testing nodepop', () => {
 
 afterAll(() => {
   mongoose.connection.close();
+  
 });

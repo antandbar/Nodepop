@@ -1,6 +1,15 @@
 'use strict';
 
 const mongoose = require('mongoose');
+const { Requester } = require('cote');
+
+
+let requester = null;
+// Request se instancia cuando no se pasan tests ni se inicia el script initdb
+if(typeof(process.env.NODE_ENV) === 'undefined') {
+  requester = new Requester({name: 'nodepop'});
+}
+
 
 // define un esquema
 const adSchema = mongoose.Schema({
@@ -27,6 +36,16 @@ adSchema.statics.adfilters = function(filtros, skip, limit, select, sort) {
   query.sort(sort);
 
   return query.exec();
+}
+
+// se llama al microservicio
+adSchema.methods.createThumbnail = function(photoName) {
+  const event = {
+    type:'thumbnail',
+    photoName
+  }
+
+  requester.send(event);
 }
 
 // crea modelo del esquema

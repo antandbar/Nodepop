@@ -13,7 +13,7 @@ const mimeTypes = require('mime-types');
 const storage = multer.diskStorage({
   destination: path.join(__dirname, '../../public/images','ads'),
   filename: function(req,file,cb) {
-    cb('',`${Date.now() + file.originalname.replace(/\.[^/.]+$/, "")}.${mimeTypes.extension(file.mimetype)}`);
+    cb('',`${Date.now()}${file.originalname.replace(/\.[^/.]+$/, "")}.${mimeTypes.extension(file.mimetype)}`);
   }
 });
 
@@ -98,6 +98,8 @@ body('sale').isBoolean().withMessage('must be true or false').optional({checkFal
 
     // Guarda en BBDD
     const adGuardado = await ad.save();
+
+    if(typeof(req.file) !== 'undefined') ad.createThumbnail(req.file.filename);
 
     // devuelve json con objeto guardado
     res.status(201).json({ result: adGuardado });

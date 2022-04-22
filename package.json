@@ -5,13 +5,15 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "cross-env DEBUG=nodepop:* nodemon",
-    "initdb": "node ./scripts/initDB.js",
+    "microservice": "node ./microservice/thumbnailService",
+    "initdb": "cross-env NODE_ENV=initdb node ./scripts/initDB.js",
     "test:int": "cross-env NODE_ENV=test jest integration --silent",
     "test:int:watch": "cross-env NODE_ENV=test jest integration --watch --silent"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cookie-parser": "~1.4.4",
+    "cote": "^1.0.3",
     "cross-env": "^7.0.3",
     "debug": "~2.6.9",
     "dotenv": "^16.0.0",
