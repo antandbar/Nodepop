@@ -22,7 +22,7 @@ const path = require('path');
 
       // Se escribe nueva imagen
       await image.write(
-        path.join(__dirname, '../public/images/ads', newImageUrl(photoName)),
+        path.join(__dirname, '../public/images/ads', newPhotoName(photoName)),
       );
 
       done();
@@ -33,7 +33,7 @@ const path = require('path');
   });
 })().catch(err => console.log('Error', err.message));
 
-const newImageUrl = photoName => {
+const newPhotoName = photoName => {
   const addPhotoName = '_100*100';
 
   const posPhotoName = photoName.lastIndexOf('.');
