@@ -99,7 +99,7 @@ body('sale').isBoolean().withMessage('must be true or false').optional({checkFal
     // Guarda en BBDD
     const adGuardado = await ad.save();
 
-    // Se llama al micro servicio
+    // Se llama al microservicio
     if(typeof(req.file) !== 'undefined') ad.createThumbnail(req.file.filename); 
 
     // devuelve json con objeto guardado

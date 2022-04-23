@@ -1,8 +1,45 @@
+securityDefinitions:  
+  JWT:  
+    type: apiKey  
+    in: header  
+    name: Authorization 
+    
 tags:
 - name: ads
   description: ads API
 
 paths:
+# [POST] login
+  /apiv1/login:
+    post:
+      tags:
+      - ads
+      summary: login
+      parameters:
+      - name: body
+        in: body
+        description: login
+        required: true
+        schema:
+          type: object
+          properties:
+            email: 
+              type: string
+              descirption: email
+              example: 'user@example.com'
+            password: 
+              type: string
+              descirption: password
+              example: '1234'
+      responses:
+        200:
+          description: 'Ok'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
 # [GET] ads
   /apiv1/ads:
     get:
@@ -70,6 +107,8 @@ paths:
         required: false
         type: field
         example: 'name'
+      security:
+        - JWT: []
       responses:
         200:
           description: 'OK'
@@ -77,7 +116,6 @@ paths:
           description: 'Unprocessable Entity'
         500:
           description: 'Server Error'
-
 
 # [POST] ads
     post:
@@ -112,6 +150,8 @@ paths:
               type: array
               descirption: ad tags
               example: ['lifestyle', 'motor']
+      security:
+        - JWT: []
       responses:
         201:
           description: 'Created'
@@ -130,6 +170,8 @@ paths:
       tags:
       - ads
       summary: Find All tags
+      security:
+        - JWT: []
       responses:
         200:
           description: 'OK'
