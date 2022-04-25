@@ -122,34 +122,35 @@ paths:
       tags:
       - ads
       summary: Add Ad
+      consumes:
+        - multipart/form-data
+      produces:
+          - application/json
       parameters:
-      - name: body
-        in: body
-        description: ad Data
-        required: false
-        schema:
-          type: object
-          properties:
-            name: 
-              type: string
-              descirption: ad name
-              example: 'bicicleta'
-            sale: 
-              type: boolean
-              descirption: ad sale
-              example: 'true'
-            price: 
-              type: float
-              descirption: ad price
-              example: '20.00'
-            photo: 
-              type: string
-              descirption: ad photo
-              example: 'bicicleta.jpeg'
-            tags: 
-              type: array
-              descirption: ad tags
-              example: ['lifestyle', 'motor']
+        - name: name
+          in: formData
+          description: ad name
+          type: string
+          example: 'bicicleta'
+        - name: sale
+          in: formData
+          description: ad sale
+          type: boolean
+          example: 'true'
+        - name: price
+          in: formData
+          description: ad price
+          type: float
+          example: '20.00'
+        - name: photo
+          in: formData
+          description: photo .jpg
+          type: file
+        - name: tags
+          in: formData
+          description: ad tags
+          type: array
+          example: ['lifestyle', 'motor']
       security:
         - JWT: []
       responses:
