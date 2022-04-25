@@ -195,7 +195,7 @@ definitions:
         type: float
         description: ad price
       photo:
-        type: string
+        type: file
         description: ad photo
       tags:
         type: array<string>
