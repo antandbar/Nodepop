@@ -19,7 +19,7 @@ Examples GET /apiv1/login:
  - http://localhost:3000/apiv1/login
 
     {   
-    "email": "user@example.com",
+    "email": "user@example.com",  
     "password": 1234  
     } 
 
