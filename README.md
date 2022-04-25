@@ -20,7 +20,7 @@ Examples GET /apiv1/login:
 
     {   
     "email": "user@example.com",
-    "password": 1234,
+    "password": 1234  
     } 
 
 Examples GET /apiv1/ads:
