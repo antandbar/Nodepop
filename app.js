@@ -12,6 +12,8 @@ require('./lib/connectMongoose');
 const i18n = require('./lib/i18nConfigure')
 const LoginController = require('./controllers/loginController');
 const jwtAuth = require('./lib/jwtAuth');
+const cors = require('cors');
+
 
 
 const loginController = new LoginController();
@@ -20,6 +22,9 @@ const loginController = new LoginController();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+// Se deshabilita cors
+app.use(cors());
 
 app.use(logger('dev'));
 app.use(express.json());
