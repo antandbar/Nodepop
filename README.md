@@ -11,7 +11,7 @@
 ### Frontend:
     http://54.242.115.29
 
-    - credentials:
+    - Credentials:
         user: user@example.com
         password:1234
 
