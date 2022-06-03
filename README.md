@@ -12,7 +12,7 @@
     http://54.242.115.29
 
     - Credentials:
-        user: user@example.com
+        user:user@example.com
         password:1234
 
 ---------------------------
