@@ -3,10 +3,10 @@
 ## Server configuration and application deployment:
 
 ### Backend:
-    - Service documentation: http://ec2-54-242-115-29.compute-1.amazonaws.com/api-docs/  
+    - Service documentation: http://ec2-54-242-115-29.compute-1.amazonaws.com/api-docs  
 
     - Grid on server - ejs:
-    http://ec2-54-242-115-29.compute-1.amazonaws.com/
+    http://ec2-54-242-115-29.compute-1.amazonaws.com
 
 ### Frontend:
     http://54.242.115.29
