@@ -1,6 +1,6 @@
 # NodePop
 --------------------------
-## Práctica servidores:
+## Server configuration and application deployment:
 
 ### Backend:
     - Service documentation: http://ec2-54-242-115-29.compute-1.amazonaws.com/api-docs/  
