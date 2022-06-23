@@ -1,22 +1,5 @@
 # NodePop
---------------------------
-## Server configuration and application deployment:
 
-### Backend:
-    - Service documentation: http://ec2-54-242-115-29.compute-1.amazonaws.com/api-docs  
-
-    - Grid on server - ejs:
-    http://ec2-54-242-115-29.compute-1.amazonaws.com
-
-### Frontend:
-    http://54.242.115.29
-
-    - Credentials:
-        user:user@example.com
-        password:1234
-
----------------------------
-* node version: 16.13.2
 
 Init DB:
 
@@ -104,4 +87,8 @@ Sort:
 - http://localhost:3000/?sort=price 
 
 Rules:
- - price or minprice,maxprice
+ - price or minprice,maxprice  
+ 
+ -----------------------------------  
+
+node version: 16.13.2
